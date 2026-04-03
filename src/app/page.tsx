@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/sections/Hero";
+import HeroNavbar from "@/components/hero/HeroNavbar";
+import HeroSlider from "@/components/hero/HeroSlider";
 import About from "@/components/sections/About";
 import Gallery from "@/components/sections/Gallery";
 import Process from "@/components/sections/Process";
@@ -17,10 +17,10 @@ export default function Home() {
       {/* Global Components */}
       <CustomCursor />
       <WhatsAppButton />
-      <Navbar />
+      <HeroNavbar />
 
       {/* Main Sections */}
-      <Hero />
+      <HeroSlider />
       <About />
       <Gallery />
       <Process />

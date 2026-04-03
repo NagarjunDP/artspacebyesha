@@ -1,24 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Hindi&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #C9A96E;
-  --color-accent-gold: #C9A96E;
-  --color-linen: #F7F4F0;
-  --color-dark-accent: #3B2F2F;
+  --color-primary: #D4AF37;
+  --color-accent-gold: #FFD700;
+  --color-linen: #F8F8F8;
+  --color-dark-accent: #1A1A1A;
   --color-blush-beige: #E8D8C4;
   --color-warm-taupe: #8C7B6E;
   --color-butterfly: #C4B39A;
-  --color-off-white: #FDFAF6;
+  --color-off-white: #FFFFFF;
   --color-soft: rgba(255, 255, 255, 0.5);
+
+  /* Indian Art Gallery specific colors */
+  --color-canvas-cream: #F5EFE0;
+  --color-aged-parchment: #EDE0C8;
+  --color-indian-ink: #1A1208;
+  --color-art-red: #C0392B;
+  --color-turmeric-gold: #D4A017;
+  --color-sage-green: #7D8C6B;
+  --color-dusty-rose: #C9908A;
+  --color-twilight-indigo: #2C3E6B;
+  --color-pure-white: #FDFAF5;
 
   --font-montserrat: var(--font-montserrat), sans-serif;
   --font-serif: var(--font-cormorant), serif;
-  --font-heading: var(--font-playfair), serif;
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-jost: 'Jost', sans-serif;
+  --font-heading: var(--font-montserrat), sans-serif;
   --font-script: var(--font-script), cursive;
-  --font-jost: var(--font-jost), sans-serif;
-  --font-sans: var(--font-dm-sans), sans-serif;
+  --font-sans: var(--font-montserrat), sans-serif;
+  --font-devanagari: 'Tiro Devanagari Hindi', serif;
 
-  --shadow-premium: 0 10px 40px -10px rgba(59, 47, 47, 0.1);
+  --shadow-premium: 0 20px 50px -10px rgba(26, 26, 26, 0.15);
 }
 
 @layer base {
@@ -27,62 +41,67 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-heading uppercase tracking-wider;
   }
 }
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 20px rgba(201, 169, 110, 0.3);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
   }
   
   .glass-card {
-    @apply bg-white/40 backdrop-blur-md border border-white/20;
+    @apply bg-black/40 backdrop-blur-md border border-white/10;
   }
 
-  .ken-burns {
+  .Ken-burns {
     animation: kenburns 20s ease infinite alternate;
   }
 
   @keyframes kenburns {
     0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+    100% { transform: scale(1.15); }
   }
 
-  .floating {
-    animation: floating 3s ease-in-out infinite;
+  .geometric-float {
+    animation: geoFloat 8s ease-in-out infinite alternate;
   }
 
-  @keyframes floating {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
+  @keyframes geoFloat {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(-1deg); }
   }
 
-  .butterfly-float {
-    animation: butterfly 6s ease-in-out infinite alternate;
+  .geometric-slide {
+    animation: geoSlide 10s ease-in-out infinite alternate;
   }
 
-  @keyframes butterfly {
-    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.2; }
-    50% { transform: translate(20px, -20px) rotate(5deg); opacity: 0.4; }
-    100% { transform: translate(0, -40px) rotate(-5deg); opacity: 0.2; }
+  @keyframes geoSlide {
+    0% { transform: translateX(0px) skewX(0deg); }
+    50% { transform: translateX(30px) skewX(-2deg); }
+    100% { transform: translateX(-10px) skewX(1deg); }
+  }
+
+  .bg-sanskrit-dot {
+    background-image: radial-gradient(circle, rgba(212,160,23,0.12) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F7F4F0;
+  background: #1A1A1A;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C9A96E;
-  border-radius: 10px;
+  background: #D4AF37;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8975D;
+  background: #FFD700;
 }

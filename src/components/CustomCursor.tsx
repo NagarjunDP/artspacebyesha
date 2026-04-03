@@ -5,6 +5,7 @@ import { motion, useSpring } from "framer-motion";
 
 const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   
   const mouseX = useSpring(0, { stiffness: 500, damping: 28 });
   const mouseY = useSpring(0, { stiffness: 500, damping: 28 });
@@ -12,6 +13,8 @@ const CustomCursor = () => {
   const size = useSpring(12, { stiffness: 400, damping: 20 });
 
   useEffect(() => {
+    setIsMounted(true);
+    
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -42,7 +45,7 @@ const CustomCursor = () => {
     };
   }, [mouseX, mouseY, isVisible, size]);
 
-  if (typeof window === "undefined") return null;
+  if (!isMounted) return null;
 
   return (
     <motion.div

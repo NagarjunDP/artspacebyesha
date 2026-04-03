@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -30,68 +30,61 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-500",
+        "fixed top-0 left-0 w-full z-50 transition-all duration-500 mix-blend-difference text-white",
         isScrolled
-          ? "bg-white/95 backdrop-blur-md py-3 md:py-4 shadow-md"
-          : "bg-dark-accent/60 backdrop-blur-sm py-4 md:py-5"
+          ? "py-4 md:py-6 bg-black/10 backdrop-blur-sm"
+          : "py-6 md:py-8 bg-transparent"
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-12 flex justify-between items-center">
+      <div className="max-w-[90%] mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-full border border-primary/20 bg-white p-1">
+        <Link href="/" className="flex items-center gap-3 group relative z-50">
+          <div className="relative w-14 h-14 md:w-16 md:h-16 overflow-hidden rounded-full border-2 border-primary group-hover:scale-105 transition-transform duration-300">
             <Image
               src="/logo.jpg"
               alt="Artspace by Eesha Logo"
-              width={48}
-              height={48}
+              width={64}
+              height={64}
               className="object-contain"
             />
           </div>
           <span
-            className={cn(
-              "font-bold text-base md:text-lg tracking-wide group-hover:text-primary transition-colors",
-              isScrolled ? "text-dark-accent" : "text-white"
-            )}
+            className="font-black text-sm md:text-xl tracking-[0.2em] uppercase hidden sm:block"
             style={{ fontFamily: "var(--font-montserrat)" }}
           >
-            ARTSPACE BY EESHA
+            ARTSPACE
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+        <div className="hidden lg:flex items-center gap-8 xl:gap-12 relative z-50">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className={cn(
-                "font-bold text-xs tracking-[0.2em] uppercase hover:text-primary transition-colors relative group",
-                isScrolled ? "text-dark-accent" : "text-white"
-              )}
+              className="font-bold text-xs tracking-[0.3em] uppercase hover:text-primary transition-colors relative group"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+              <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
           <Link
             href="https://wa.me/"
             target="_blank"
-            className="bg-primary text-white text-xs tracking-[0.2em] uppercase px-6 py-3 hover:bg-white hover:text-dark-accent border border-primary transition-all shadow-lg active:scale-95 flex items-center gap-2 font-bold"
+            className="group flex items-center gap-2 font-bold text-xs tracking-[0.3em] uppercase hover:text-primary transition-all"
             style={{ fontFamily: "var(--font-montserrat)" }}
           >
-            <MessageCircle size={16} />
             BOOK NOW
+            <span className="w-8 h-8 rounded-full border border-current flex items-center justify-center group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all">
+              <ArrowUpRight size={14} />
+            </span>
           </Link>
         </div>
 
         {/* Mobile Toggle */}
         <button
-          className={cn(
-            "lg:hidden transition-colors",
-            isScrolled ? "text-dark-accent" : "text-white"
-          )}
+          className="lg:hidden relative z-50 w-12 h-12 flex items-center justify-center border border-white/30 rounded-full hover:bg-white hover:text-black transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -99,26 +92,31 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Extreme Full-Screen Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-8 lg:hidden"
+            initial={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
+            animate={{ opacity: 1, clipPath: "circle(150% at 100% 0)" }}
+            exit={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
+            transition={{ duration: 0.7, ease: [0.7, 0, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-dark-accent flex flex-col items-center justify-center gap-8 lg:hidden !text-white !mix-blend-normal"
           >
+            {/* Geometric background element in mobile menu */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+               <div className="absolute top-[-10%] right-[-20%] w-[300px] h-[300px] border-[20px] border-primary rotate-45" />
+            </div>
+
             {navLinks.map((link, index) => (
               <motion.div
                 key={link.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 + 0.3 }}
               >
                 <Link
                   href={link.href}
-                  className="font-bold text-2xl tracking-[0.1em] uppercase hover:text-primary transition-colors text-dark-accent"
+                  className="font-black text-4xl sm:text-5xl tracking-[0.2em] uppercase hover:text-primary transition-colors hover:pl-4 duration-300"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -127,19 +125,20 @@ const Navbar = () => {
               </motion.div>
             ))}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.1 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: navLinks.length * 0.1 + 0.3 }}
+              className="mt-8"
             >
               <Link
                 href="https://wa.me/"
                 target="_blank"
-                className="mt-4 bg-primary text-white px-10 py-5 flex items-center gap-3 font-bold tracking-[0.2em] uppercase active:scale-95 transition-transform"
+                className="bg-primary text-black px-12 py-6 flex items-center gap-4 font-black tracking-[0.3em] uppercase hover:bg-white transition-colors"
                 style={{ fontFamily: "var(--font-montserrat)" }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <MessageCircle size={20} />
                 BOOK NOW
+                <ArrowUpRight size={24} />
               </Link>
             </motion.div>
           </motion.div>
