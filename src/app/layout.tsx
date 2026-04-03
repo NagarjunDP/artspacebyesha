@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Playfair_Display, Dancing_Script, Jost, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, Playfair_Display, Dancing_Script, Jost, DM_Sans, Montserrat } from "next/font/google";
 import "./globals.css";
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
 
 const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -45,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorantGaramond.variable} ${playfairDisplay.variable} ${dancingScript.variable} ${jost.variable} ${dmSans.variable} h-full antialiased scroll-smooth`}
+      className={`${montserrat.variable} ${cormorantGaramond.variable} ${playfairDisplay.variable} ${dancingScript.variable} ${jost.variable} ${dmSans.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col bg-[#F7F4F0] selection:bg-[#C9A96E]/30 text-[#3B2F2F]">
         {children}

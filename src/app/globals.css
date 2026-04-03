@@ -9,7 +9,9 @@
   --color-warm-taupe: #8C7B6E;
   --color-butterfly: #C4B39A;
   --color-off-white: #FDFAF6;
+  --color-soft: rgba(255, 255, 255, 0.5);
 
+  --font-montserrat: var(--font-montserrat), sans-serif;
   --font-serif: var(--font-cormorant), serif;
   --font-heading: var(--font-playfair), serif;
   --font-script: var(--font-script), cursive;
